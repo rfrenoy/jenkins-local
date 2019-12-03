@@ -1,0 +1,16 @@
+version: '3'
+services:
+    jenkins:
+        build: ./jenkins
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - ./jenkins/jenkins_home:/var/jenkins_home
+        environment:
+            JAVA_OPTS: -Djenkins.install.runSetupWizard=false
+        ports:
+            - "8080:8080"
+    registry:
+        image: registry:2
+        ports:
+            - "5000:5000"
+        restart: always
